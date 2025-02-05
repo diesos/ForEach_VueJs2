@@ -49,7 +49,7 @@ router.put('/update/:id', isGranted, (req, res) => {
 	const { id } = req.params;
 	const { nom, recette } = req.body;
 	const sql = 'UPDATE cocktails SET nom = ?, description = ?, verre=?, garniture=?, alcoolise=? WHERE id = ?';
-	connection.query(sql, [nom, description, verre, garniture, alcoolise id], (error) => {
+	connection.query(sql, [nom, description, verre, garniture, alcoolise, id], (error) => {
 		if (error) {
 			res.status(500).send('Erreur lors de la modification du cocktail');
 		} else {
