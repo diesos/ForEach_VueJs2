@@ -11,6 +11,7 @@ import { RouterLink, RouterView } from 'vue-router'; // Importation des composan
     <RouterLink to="/home">Users List</RouterLink>
     <RouterLink to="/register">Register</RouterLink>
     <RouterLink to="/login">Login</RouterLink>
+    <RouterLink to="/cocktail">Cocktail</RouterLink>
   </nav>
 
   <!-- Affichage du composant correspondant à la route actuelle -->

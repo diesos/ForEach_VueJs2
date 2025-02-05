@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const mysql = require('./config/database');
 const cors = require('cors');
 const routeUser = require('./routes/user');
+const routeCocktail = require('./routes/cocktail');
 const app = express();
 
 // chargement variables d'environnement
@@ -17,6 +18,7 @@ app.use(express.json());
 
 // route pour les utilisateurs
 app.use('/user', routeUser)
+app.use('/cocktail', routeCocktail)
 
 // test connexion base de donnée
 
