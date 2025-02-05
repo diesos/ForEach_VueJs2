@@ -15,7 +15,7 @@ const isGranted = (req, res, next) => {
 
     jwt.verify(token, process.env.secret_key, (err, decoded) => {
         if (err) {
-            return res.status(401).send('Accès refusé');
+            return res.status(401).send('Accès refusé, token invalide');
         }
 
         req.user = decoded;

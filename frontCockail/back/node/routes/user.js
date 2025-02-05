@@ -3,6 +3,7 @@ const connection = require('../config/database');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
+const isGranted = require('../middleware/authMiddleware');
 
 // Création des routes
 
@@ -55,6 +56,10 @@ router.post('/create', (req, res) => {
             res.status(201).send('Utilisateur créé avec succès');
         }
     });
+});
+
+router.post('/check-token', isGranted, (req, res) => {
+    res.status(200).send('Token valide');
 });
 
 // Route pour récupérer tous les utilisateurs
