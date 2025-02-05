@@ -7,11 +7,12 @@ const verifyAcces = () => {
 	if (!token) {
 		console.log("Token manquant !");
 		router.push('/login');
+		return false;
 	}
 	else {
 		console.log("Accès autorisé");
+		return true;
 	}
-	next();
 };
 
 export default verifyAcces;

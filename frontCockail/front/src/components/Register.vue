@@ -26,7 +26,9 @@
     <script>
 
     import axios from 'axios' // Importation d'Axios pour les requêtes HTTP
+    import { useToast } from 'vue-toastification';
 
+    const toast = useToast();
     export default {
         data() {
             return {
@@ -45,7 +47,7 @@
                         email: this.email,
                         mot_de_passe: this.password // Correction du nom du champ (doit correspondre à l'API)
                     });
-
+                    toast.success('Compte créé avec succès');
                     console.log(response.data); // Affichage de la réponse du serveur
 
                     // Réinitialisation des champs après l'envoi du formulaire
@@ -54,6 +56,7 @@
                     this.password = '';
 
                 } catch (error) {
+                    toast.error('Erreur lors de la création du compte');
                     console.error(error); // Gestion des erreurs
                 }
             }

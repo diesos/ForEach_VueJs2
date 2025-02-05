@@ -5,7 +5,9 @@ import Login from "../src/components/Login.vue";
 import Profil from "../src/components/Profil.vue";
 import Cocktail from "../src/components/Cocktail.vue";
 import api from "../service/axiosInterceptor"
+import { useToast } from 'vue-toastification';
 
+const toast = useToast();
 
 const routes = [
     {path: "/home", component: usersList},
@@ -26,17 +28,19 @@ router.beforeEach(async (to, from, next) => {
     if (to.meta.requiresAuth) {
       if (!token) {
         console.log("🔴 Token manquant, redirection vers /login");
+        toast.error("Vous devez être connecté pour accéder à cette page");
         return next("/login");
       }
 
       try {
         const response = await api.post("/user/check-token"); // Vérifie si l'utilisateur existe
         console.log("✅ Utilisateur valide :", response.data);
-        if(next === "/login")
+        if(next === "/login") {
              res.send.json({message: "Vous êtes déjà connecté"});
             setTimeout(() => {
                 res.redirect("/profil");
             }, 3000);
+        }
         return next();
       } catch (error) {
         console.log("🔴 Utilisateur introuvable, suppression du token");

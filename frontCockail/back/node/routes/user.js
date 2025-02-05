@@ -4,6 +4,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const isGranted = require('../middleware/authMiddleware');
+const xss = require('xss');
 
 // Création des routes
 
@@ -20,7 +21,6 @@ router.post('/login', (req, res) => {
         }
 
         const { nom } = result[0]; // Extraction du nom de l'utilisateur
-        console.log(result);
 
         // Comparaison du mot de passe fourni avec le mot de passe haché stocké en base de données
         bcryptjs.compare(mot_de_passe, result[0].mot_de_passe, (err, resultat) => {
@@ -40,8 +40,12 @@ router.post('/login', (req, res) => {
 
 // Route de création d'un utilisateur
 router.post('/create', (req, res) => {
-    console.log("✅Création d'un utilisateur");
-    const { nom, email, mot_de_passe } = req.body; // Récupération des données du formulaire
+    console.log("Tentative de Création d'un utilisateur");
+    let { nom, email, mot_de_passe } = req.body; // Récupération des données du formulaire
+
+    nom = xss(nom);
+    email = xss(email);
+    mot_de_passe = xss(mot_de_passe);
 
     // Hachage du mot de passe avec un facteur de coût de 2
     const hashedPassword = bcryptjs.hashSync(mot_de_passe, 2);

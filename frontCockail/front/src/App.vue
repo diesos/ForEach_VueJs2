@@ -1,29 +1,43 @@
-<script>
-import usersList from './components/userList.vue' // Importation du composant de la liste des utilisateurs
-import { RouterLink, RouterView } from 'vue-router'; // Importation des composants pour la navigation Vue Router
+<script setup>
+import verifyAcces from '../service/auth';
+import usersList from './components/userList.vue'; // Composant liste utilisateurs
+import { RouterLink, RouterView, useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue';
+import { useToast } from 'vue-toastification';
+import { useAuthStore } from './stores/authStore';
 
-// L'exportation du composant App n'est pas nécessaire ici car Vue le détecte automatiquement
+const authStore = useAuthStore();
+const router = useRouter();
+const toast = useToast();
+const isAuthenticated = ref(false);
+
+
+// Fonction de déconnexion
+const logout = () => {
+  authStore.logout();
+  toast.success('Déconnexion réussie');
+  router.push('/login'); // Redirection avec `useRouter`
+};
 </script>
 
 <template>
   <nav>
-    <!-- Liens de navigation vers différentes pages -->
     <RouterLink to="/home">Users List</RouterLink>
-    <RouterLink to="/register">Register</RouterLink>
-    <RouterLink to="/login">Login</RouterLink>
+    <RouterLink to="/register" v-if="!isAuthenticated">Register</RouterLink>
+    <RouterLink to="/login" v-if="!isAuthenticated">Login</RouterLink>
     <RouterLink to="/cocktail">Cocktail</RouterLink>
+    <RouterLink to="/profil" v-if="authStore.isAuthenticated">Profil</RouterLink>
+    <RouterLink to="#" @click.prevent="logout" v-if="authStore.isAuthenticated">Déconnexion</RouterLink>
   </nav>
 
-  <!-- Affichage du composant correspondant à la route actuelle -->
   <RouterView></RouterView>
 </template>
 
 <style>
-  /* Styles de la barre de navigation */
-  nav {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    background-color: #f1f1f1;
-  }
+nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background-color: #f1f1f1;
+}
 </style>

@@ -21,7 +21,12 @@
     <script>
 
     import axios from 'axios' // Importation d'Axios pour les requêtes HTTP
+    import { useToast } from 'vue-toastification';
+    import api from "../../service/axiosInterceptor.js";
+    import { useAuthStore } from '../stores/authStore.js';
 
+    const authStore = useAuthStore();
+    const toast = useToast();
     export default {
         data() {
             return {
@@ -35,25 +40,10 @@
         methods: {
             async loginUser() {
                 try {
-                    // Envoi d'une requête POST pour créer un utilisateur
-                    const response = await axios.post('http://localhost:3000/user/login', {
-                        email: this.email,
-                        mot_de_passe: this.password,
-                    }).then(response => {
-                        console.log(response.data);
-                        this.token = response.data.token;
-                        localStorage.setItem('token', this.token);
-                        localStorage.setItem('email', this.email);
-                        localStorage.setItem('nom', response.data.user.nom);
-                    });
-                    this.$router.push('/profil'); // Redirection vers la page d'accueil après la connexion
-                    // Réinitialisation des champs après l'envoi du formulaire
-                    this.email = '';
-                    this.password = '';
-
-                } catch (error) {
-                    console.error(error); // Gestion des erreurs
-                }
+                    authStore.loginUser(email.value, password.value, router, toast);
+                    } catch (error) {
+                        console.error(error);
+                    }
             }
         }
     }
