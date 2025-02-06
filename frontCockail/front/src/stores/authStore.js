@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia';
+import { useToast } from 'vue-toastification';
 import api from '../../service/axiosInterceptor'; // Assure-toi que l'import de ton instance Axios est correct
+
+const toast = useToast();
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -37,7 +40,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    logout(router, toast) {
+    logout(router, toast, succes) {
       // Supprimer les infos utilisateur
       this.token = null;
       this.email = null;
@@ -50,7 +53,7 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('nom');
 
       // Message et redirection
-      toast.success('Déconnexion réussie');
+
       router.push('/login');
     }
   }
