@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <form @submit.prevent="loginUser">
+  <div style="padding: 20px;">
+    <form @submit.prevent="loginUser" display="flex" flex-direction="column" align-items="center">
       <!-- Empêche le rechargement de la page lors de la soumission -->
-      <label for="email">Email</label>
-      <input type="email" id="email" v-model="email" required />
+      <label for="email" style="margin-right: 12px;">Email</label>
+      <input style="padding: 12px;" type="email" id="email" v-model="email" required />
       <!-- Liaison de l'input avec la donnée "email" -->
 
-      <label for="password">Password</label>
-      <input type="password" id="password" v-model="password" required />
+      <label for="password" style="margin-right: 12px;">Password</label>
+      <input style="padding: 12px;" type="password" id="password" v-model="password" required />
       <!-- Liaison de l'input avec la donnée "password" -->
 
-      <button type="submit">Submit</button>
+      <button style="padding: 12px; margin-top: 20px;" type="submit">Submit</button>
       <!-- Bouton de soumission -->
     </form>
   </div>
-  <button style="padding: 17px; font-size: 16px" @click="$router.go(-1)">
+  <button style="padding: 12px; font-size: 16px" @click="$router.go(-1)">
     Back
   </button>
 </template>

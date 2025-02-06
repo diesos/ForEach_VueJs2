@@ -12,6 +12,7 @@ import { useToast } from 'vue-toastification';
 const toast = useToast();
 
 const routes = [
+    {path: "/", component: Home},
     {path: "/home", component: Home},
     {path: "/users", component: usersList},
     {path: "/profil", component: Profil},

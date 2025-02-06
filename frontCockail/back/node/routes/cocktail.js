@@ -45,7 +45,7 @@ router.get("/getById/:id", isGranted, (req, res) => {
 
 router.put("/update/:id", isGranted, (req, res) => {
   const { id } = req.params;
-  const { nom, recette } = req.body;
+  const { nom, description, verre, garniture, alcoolise } = req.body;
   const sql =
     "UPDATE cocktails SET nom = ?, description = ?, verre=?, garniture=?, alcoolise=? WHERE id = ?";
   connection.query(

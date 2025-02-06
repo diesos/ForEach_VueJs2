@@ -32,7 +32,9 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('nom', this.nom);
 
         // Afficher un message et rediriger
-        toast.success('Connexion réussie');
+        toast.success('Connexion réussie', {
+          timeout: 1000
+        });
         router.push('/profil');
       } catch (error) {
         toast.error('Erreur lors de la connexion');

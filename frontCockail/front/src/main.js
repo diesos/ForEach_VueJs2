@@ -1,11 +1,12 @@
-// Importation du fichier CSS global
+
 import './assets/main.css';
 
 
-// Importation de Vue
 import { createApp } from 'vue';
+import PrimeVue from 'primevue/config';
+import Aura from '@primevue/themes/aura';
 
-// Importation du composant principal de l'application
+
 import App from './App.vue';
 import router from '../service/router';
 
@@ -20,7 +21,13 @@ import 'vue-toastification/dist/index.css';
 
 // Création de l'application Vue
 const app = createApp(App);
+
 app.use(pinia)
+app.use(PrimeVue, {
+	theme: {
+		preset: Aura,
+	}
+});
 // Configuration de Vue Toastification
 app.use(Toast, {
   position: POSITION.TOP_RIGHT, // Position des notifications
