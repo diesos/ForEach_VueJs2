@@ -6,7 +6,7 @@ const bcryptjs = require("bcryptjs");
 const isGranted = require("../middleware/authMiddleware");
 
 router.get("/all", isGranted, (req, res) => {
-  const sql = "SELECT * FROM cocktails";
+  const sql = "SELECT * FROM detailcocktail";
   connection.query(sql, (error, result) => {
     if (error) {
       res.status(500).send("Erreur lors de la récupération des cocktails");

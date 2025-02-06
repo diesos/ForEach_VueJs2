@@ -11,7 +11,7 @@
 		class="p-3 mx-auto border border-black w-1/2 rounded-lg mt-2 bg-aliceblue text-black my-4"
 	>
 
-		<p>{{ cocktail.nom }}</p>
+		<p>{{ cocktail.cocktail_nom }}</p>
 		<p>{{ cocktail.description }}</p>
 		<p>{{ cocktail.verre }}</p>
 		<p>{{ cocktail.garniture }}</p>
@@ -84,7 +84,7 @@ export default {
 		// Charger les cocktails au montage
 		fetchCocktails();
 
-		return { cocktails, selectedCocktail, showModal,showAddModal, openAddModal, openEditModal, updateCocktail };
+		return { cocktails, selectedCocktail, showModal,showAddModal, openAddModal, openEditModal, updateCocktail, addedCocktail };
 	}
 };
 </script>

@@ -25,6 +25,8 @@ const cocktail = ref({
 // Variable pour contrôler l'affichage du modal
 const visible = ref(true);
 
+
+
 // Fonction pour sauvegarder les modifications
 const saveChanges = async () => {
   try {

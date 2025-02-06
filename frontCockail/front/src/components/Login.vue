@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 20px;">
+  <div style="padding: 20px; display: flex; flex-direction: column; align-items: center">
     <form @submit.prevent="loginUser" display="flex" flex-direction="column" align-items="center">
       <!-- Empêche le rechargement de la page lors de la soumission -->
       <label for="email" style="margin-right: 12px;">Email</label>
