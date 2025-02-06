@@ -8,6 +8,9 @@ module.exports = {
     './components/**/*.{js,jsx,vue}',
     './app/**/*.{js,jsx,vue}',
     './src/**/*.{js,jsx,vue}',
+    './node\_modules/primevue/\*\*/\*.{vue,js,ts,jsx,tsx}',
+
+
 	],
   prefix: "",
   theme: {

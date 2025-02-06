@@ -17,16 +17,34 @@ router.get("/all", isGranted, (req, res) => {
 });
 
 router.post("/create", isGranted, (req, res) => {
-  const { nom, recette, id_utilisateur } = req.body;
+  const { nom, description, verre, garniture, alcoolise } = req.body;
+
   const sql =
     "INSERT INTO cocktails (nom, description, verre, garniture, alcoolise) VALUES (?, ?, ?, ?, ?)";
-  connection.query(sql, [nom, recette, id_utilisateur], (error) => {
-    if (error) {
-      res.status(500).send("Erreur lors de la création du cocktail");
-    } else {
-      res.status(201).send("Cocktail créé avec succès");
+
+  connection.query(
+    sql,
+    [nom, description, verre, garniture, alcoolise ? 1 : 0],
+    (error) => {
+      if (error) {
+        console.error("Erreur SQL :", error.sqlMessage); // ✅ Log pour debug
+
+        if (error.code === "ER_DUP_ENTRY") {
+          return res.status(409).json({
+            message: `Le cocktail "${nom}" existe déjà.`,
+            error: error.sqlMessage,
+          });
+        }
+
+        return res.status(500).json({
+          message: "Erreur lors de la création du cocktail.",
+          error: error.sqlMessage,
+        });
+      }
+
+      res.status(201).json({ message: "Cocktail créé avec succès" });
     }
-  });
+  );
 });
 
 router.get("/getById/:id", isGranted, (req, res) => {
@@ -53,6 +71,14 @@ router.put("/update/:id", isGranted, (req, res) => {
     [nom, description, verre, garniture, alcoolise, id],
     (error) => {
       if (error) {
+        console.error("Erreur SQL :", error.sqlMessage); // ✅ Log pour debug
+
+        if (error.code === "ER_DUP_ENTRY") {
+          return res.status(409).json({
+            message: `Le cocktail "${nom}" existe déjà.`,
+            error: error.sqlMessage,
+          });
+        }
         res.status(500).send("Erreur lors de la modification du cocktail");
       } else {
         res.status(200).send("Cocktail modifié avec succès");
