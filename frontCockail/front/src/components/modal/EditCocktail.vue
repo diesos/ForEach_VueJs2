@@ -50,7 +50,7 @@ const saveChanges = async () => {
         <div class="modal-content flex flex-col gap-4 p-4">
 			<h2 class="text-white px-3 py-2 font-semibold" >Apportez vos modification ci-dessous</h2>
 
-			<InputText v-model="cocktail.nom" :class="{ 'border-red-500  bg-color-500 animate-shake': errorNom }" laceholder="Nom du cocktail" />
+			<InputText v-model="cocktail.cocktail_nom" :class="{ 'border-red-500  bg-color-500 animate-shake': errorNom }" laceholder="Nom du cocktail" />
 			<textarea v-model="cocktail.description" class="border rounded-lg p-2 overflow-y-auto break-words min-h-[100px] !important" placeholder="Description" unstyled />
 			<InputText v-model="cocktail.verre" placeholder="Type de verre" />
 			<InputText v-model="cocktail.garniture" placeholder="Garniture" />
