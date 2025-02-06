@@ -1,28 +1,28 @@
 <template>
+  <div class="flex flex-col bg-slate-300 w-1/3 m-auto mt-12 p-12 rounded-lg shadow-sm hover:shadow-lg">
   <div style="padding: 20px; display: flex; flex-direction: column; align-items: center">
-    <form @submit.prevent="loginUser" display="flex" flex-direction="column" align-items="center">
+    <form @submit.prevent="loginUser" display="flex" flex-direction="column" align-items="center" class="text-black">
       <!-- Empêche le rechargement de la page lors de la soumission -->
       <label for="email" style="margin-right: 12px;">Email</label>
-      <input style="padding: 12px;" type="email" id="email" v-model="email" required />
+      <input class="h-12 rounded text-black !important" type="email" id="email" v-model="email" required/>
       <!-- Liaison de l'input avec la donnée "email" -->
 
       <label for="password" style="margin-right: 12px;">Password</label>
       <input style="padding: 12px;" type="password" id="password" v-model="password" required />
       <!-- Liaison de l'input avec la donnée "password" -->
 
-      <button style="padding: 12px; margin-top: 20px;" type="submit">Submit</button>
+      <Button style="padding: 12px; margin-top: 20px;" type="submit">Submit</Button>
       <!-- Bouton de soumission -->
     </form>
   </div>
-  <button style="padding: 12px; font-size: 16px" @click="$router.go(-1)">
-    Back
-  </button>
+</div>
 </template>
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
-import { useAuthStore } from "@/stores/authStore.js"; // Assure-toi que le chemin est bon
+import { useAuthStore } from "@/stores/authStore.js";
+import Button from "primevue/button";
 
 const authStore = useAuthStore();
 const router = useRouter();

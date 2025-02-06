@@ -1,14 +1,13 @@
 <template>
     <div>
-        <h1>users list</h1>
-        <!-- Affichage de la liste des utilisateurs -->
-        <ul>
-            <!-- Boucle v-for pour afficher chaque utilisateur -->
-            <li v-for="user in users" :key="user.id">
+        <div
+		v-for="user in users"
+		:key="user.id"
+		class="p-3 mx-auto border border-black w-1/2 rounded-lg mt-2 bg-aliceblue text-black my-4">
                 <p>{{ user.nom }}</p>
                 <p>{{ user.email }}</p>
-            </li>
-        </ul>
+
+    </div>
 
 
     </div>
